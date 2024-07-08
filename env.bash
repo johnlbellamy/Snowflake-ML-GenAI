@@ -1,3 +1,0 @@
-export USER_NAME=DATA_SCIENTIST
-export PASSWORD=1234QWERqwer
-export ACCOUNT=cv41496.west-us-2.azure
