@@ -1,0 +1,10 @@
+snowflake-connector-python==3.11.0
+snowflake-ml-python==1.5.3
+snowflake-snowpark-python==1.19.0
+pandas
+seaborn
+fastapi
+gunicorn
+pydantic
+
+
