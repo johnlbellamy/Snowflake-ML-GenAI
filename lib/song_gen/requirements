@@ -1,0 +1,13 @@
+langchain
+langchain-community
+langchain-openai
+snowflake-ml-python
+snowflake-connector-python
+python-dotenv
+openai
+snowflake-sqlalchemy
+docarray
+faiss-cpu
+streamlit
+streamlit_chat
+watchdog
