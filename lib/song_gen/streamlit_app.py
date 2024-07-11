@@ -12,6 +12,7 @@ from main import CONN_CONFIG
 conn = Session.builder.configs(CONN_CONFIG).create()
 LYRICS_TABLE = conn.table("LYRICS").to_pandas()
 
+
 class WikiStreamlitApp:
     def __init__(self):
         self.build_app()
@@ -44,18 +45,29 @@ class WikiStreamlitApp:
         st.markdown("<h1 style='text-align: center;'>Song Writing App</h1>", unsafe_allow_html=True)
 
     @staticmethod
+    def get_lyric_list(artist_name: str) -> list:
+        lyrics = LYRICS_TABLE[LYRICS_TABLE["ARTIST"] == artist_name.upper()]
+        lyric_strings = []
+        for lyric in lyrics["LYRICS"].to_list():
+            lyric_strings.append(lyric.replace("\n", " "))
+        return lyric_strings
+
+    @staticmethod
     def generate_response(prompt):
         st.session_state['messages'].append({"role": "user", "content": prompt})
 
-        name = get_first_name_agent(prompt)
-        lyrics = LYRICS_TABLE[LYRICS_TABLE["ARTIST"] == name.upper()]
-        lyric_strings = []
-        lyrics["LYRICS"].to_list()[0].replace("\n", " ")
-        for lyric in lyrics["LYRICS"].to_list():
-            lyric_strings.append(lyric.replace("\n", " "))
+        artist_name = get_first_name_agent(prompt)
+        lyric_strings = WikiStreamlitApp.get_lyric_list(artist_name)
 
-        song = write_song_agent(lyric_strings)
-        generated_text = {"result": song}
+        if len(lyric_strings) == 0:  # if artist not in database, return default
+            lyric_strings = WikiStreamlitApp.get_lyric_list("TAYLOR")
+            song = write_song_agent(lyric_strings)
+            generated_text = {"result": f"Artist name not provided or not supported\nHere's a song in the style of "
+                                        f"Taylor Swift:\n{song}"}
+        else:
+            song = write_song_agent(lyric_strings)
+            generated_text = {
+                "result": song}
 
         st.session_state['messages'].append({"role": "assistant", "content": generated_text['result']})
         return generated_text["result"]

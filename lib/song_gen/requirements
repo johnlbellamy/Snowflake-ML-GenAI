@@ -11,3 +11,4 @@ faiss-cpu
 streamlit
 streamlit_chat
 watchdog
+pytest

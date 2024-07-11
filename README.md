@@ -4,7 +4,7 @@
 ###
 ### The wine library shows e2e model dev and deployment using Snowflakes Model repo and pipelines. The song_gen library 
 ### shows how to embed and generate data based on data within Snowflake. The data in the song_gen library is copyright
-### the respective artist and is for demonstration purposes only. 
+### by the respective artist and is for demonstration purposes only. 
 
 ## Usage (Wine Quality Classifier):
 ## Load environment variables
