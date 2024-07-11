@@ -28,3 +28,6 @@
 ### 5) Execute streamlit run streamlit_app.py
 ### 6) Navigate to: localhost:8501
 <img src="images/song_writing_demo.gif">
+
+## Testing:
+### Example unit tests have been included but not completed
